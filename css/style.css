@@ -1,0 +1,397 @@
+/* ------------------------------ */
+/*            ROOT + BASE         */
+/* ------------------------------ */
+:root {
+  --gold-color: #d4a017;
+  --gold-light: #e6c56a;
+  --white-color: #ffffff;
+  --text-color: #333;
+  --bg-color: #fcfaf6;
+  --shadow-light: rgba(0, 0, 0, 0.08);
+}
+
+body {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  background: var(--bg-color)
+    url("https://www.transparenttextures.com/patterns/white-wall.png");
+  color: var(--text-color);
+  text-align: center;
+  overflow-x: hidden;
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ------------------------------ */
+/*        GEOMETRIC BACKGROUND    */
+/* ------------------------------ */
+
+.decor-shape {
+  position: fixed;
+  pointer-events: none;
+  z-index: -1;
+  filter: drop-shadow(0 4px 6px rgba(255, 242, 0, 0.1));
+}
+
+.shape-1 { width: 300px; top: 100px; left: 100px; }
+.shape-2 { width: 300px; bottom: 100px; right: 100px; }
+.shape-3 { width: 300px; top: 100px; right: 100px; }
+.shape-4 { width: 300px; bottom: 100px; left: 100px; }
+
+@media (max-width: 700px) {
+  .shape-1 { width: 220px; top: -30px; left: -20px; }
+  .shape-2 { width: 230px; bottom: -40px; right: -30px; }
+  .shape-3 { width: 200px; top: -30px; right: -20px; }
+  .shape-4 { width: 180px; bottom: -20px; left: -20px; }
+}
+
+/* ------------------------------ */
+/*         CONTAINER WRAPPER      */
+/* ------------------------------ */
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 20px 80px;
+}
+
+/* ------------------------------ */
+/*             HEADER             */
+/* ------------------------------ */
+
+.header {
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #fff8e6, #f5ead3);
+  border-bottom: 3px solid var(--gold-color);
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 4px 15px var(--shadow-light);
+}
+
+.header h1 {
+  font-family: "Great Vibes", cursive;
+  font-size: 4.2rem;
+  color: var(--gold-color);
+  margin: 0;
+  letter-spacing: 2px;
+}
+
+.header::after {
+  content: "";
+  width: 140px;
+  height: 4px;
+  background: var(--gold-color);
+  display: block;
+  margin: 15px auto 0;
+  border-radius: 5px;
+}
+
+/* ------------------------------ */
+/*          COUNTDOWN TIMER       */
+/* ------------------------------ */
+
+#countdown {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin: 40px 0;
+  flex-wrap: wrap;
+}
+
+.timer-box {
+  background: var(--gold-color);
+  color: var(--white-color);
+  padding: 18px;
+  border-radius: 12px;
+  min-width: 90px;
+  box-shadow: 0 4px 12px var(--shadow-light);
+  transition: 0.2s;
+}
+
+.timer-box:hover { transform: translateY(-5px); }
+
+.timer-box span { font-size: 2.2rem; font-weight: 600; }
+.timer-box p { margin: 0; font-size: 0.8rem; }
+
+/* ------------------------------ */
+/*         EVENT DETAILS          */
+/* ------------------------------ */
+
+.event-details {
+  background: white;
+  padding: 35px;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px var(--shadow-light);
+  border: 1px solid #eee;
+  margin-bottom: 40px;
+}
+
+.event-title {
+  font-size: 1.7rem;
+  color: var(--gold-color);
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+/* DATE CARD */
+
+.date-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 25px 20px;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  border: 1px solid #eee;
+}
+
+.date-side { flex: 1; text-align: center; }
+.date-side-title {
+  font-size: 1rem;
+  color: var(--gold-color);
+  font-weight: 600;
+}
+
+.date-center { flex: 1; text-align: center; }
+
+.date-number {
+  font-size: 4.5rem;
+  font-weight: 600;
+  color: var(--gold-color);
+  font-family: "Great Vibes", cursive;
+}
+
+.date-month { font-size: 1.4rem; margin-top: 5px; }
+.date-year { font-size: 1rem; margin-top: 3px; }
+
+@media (max-width: 600px) {
+  .date-card { flex-direction: column; gap: 10px; padding: 20px; }
+}
+
+/* ------------------------------ */
+/*     TITLE WITH RINGS           */
+/* ------------------------------ */
+
+.title-with-ring {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--gold-color);
+}
+
+.ring-icon { width: 28px; opacity: 0.9; }
+
+@media (max-width: 600px) {
+  .title-with-ring { font-size: 1.6rem; gap: 8px; }
+  .ring-icon { width: 22px; }
+}
+
+/* ------------------------------ */
+/*            LOCATION            */
+/* ------------------------------ */
+
+.location {
+  margin-top: 40px;
+  padding: 30px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px var(--shadow-light);
+}
+
+.map-container {
+  padding-top: 56.25%;
+  border: 2px solid var(--gold-color);
+  border-radius: 12px;
+}
+
+/* ------------------------------ */
+/*        MESSAGE SECTION         */
+/* ------------------------------ */
+
+.message-section {
+  margin-top: 60px;
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.message-title {
+  font-family: "Great Vibes", cursive;
+  font-size: 2.3rem;
+  color: var(--text-color);
+  margin-bottom: 20px;
+}
+
+.message-box {
+  background: #fff;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px var(--shadow-light);
+  border: 1px solid #eee;
+}
+
+.color-label {
+  font-size: 1rem;
+  color: var(--gold-color);
+  font-weight: 600;
+}
+
+.color-options {
+  margin: 10px 0 20px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.color-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #fff;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+.black { background: #000; }
+.red { background: #e63946; }
+.blue { background: #457b9d; }
+.green { background: #2a9d8f; }
+.purple { background: #9d4edd; }
+.gold { background: #d4a017; }
+
+textarea#guestMessage {
+  width: 90%;
+  height: 90px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  resize: none;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  border: 2px solid var(--gold-color);
+}
+
+.message-preview{
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px;
+  min-height: 150px;
+  border: 2px solid var(--gold-color);
+}
+
+#previewText {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+/* DRAW CANVAS */
+
+.draw-title {
+  margin-top: 25px;
+  font-size: 1.4rem;
+  color: var(--gold-color);
+}
+
+.draw-container {
+  margin-top: 15px;
+  background: #fff;
+  border: 2px solid var(--gold-color);
+  border-radius: 12px;
+  padding: 10px;
+}
+
+#drawCanvas {
+  width: 100%;
+  height: 300px;
+  background: white;
+  border-radius: 10px;
+  display: block;
+  touch-action: none;
+}
+
+.draw-tools {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.draw-btn {
+  background: var(--gold-color);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+@media (max-width: 600px) {
+  #drawCanvas { height: 220px; }
+}
+.view-btn {
+  margin-top: 15px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  background: var(--gold-color);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 200px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.view-btn:hover {
+  opacity: 0.85;
+}
+
+/* ------------------------------ */
+/*            QR SECTION          */
+/* ------------------------------ */
+
+.qr-section {
+  margin-top: 60px;
+  margin-bottom: 40px;
+}
+
+.qr-title {
+  font-family: "Great Vibes", cursive;
+  font-size: 2.2rem;
+  color: var(--text-color);
+}
+
+.qr-image {
+  width: 180px;
+  transform: scale(1.5);
+}
+
+.qr-link {
+  display: inline-block;
+  margin-top: 15px;
+  color: var(--gold-color);
+  font-size: 0.95rem;
+  text-decoration: underline;
+  margin-bottom: 20px;
+}
+
+/* ------------------------------ */
+/*             FOOTER             */
+/* ------------------------------ */
+
+footer {
+  margin-top: 60px;
+  padding-bottom: 30px;
+  font-family: "Great Vibes", cursive;
+  font-size: 2rem;
+  color: var(--gold-color);
+}
+.qr-text{
+  margin-top: 50px;
+   font-size: 1.2rem;
+    color: var(--gold-color);
+}

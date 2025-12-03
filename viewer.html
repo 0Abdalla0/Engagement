@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guest Messages & Drawings</title>
+  <link rel="stylesheet" href="css/viewerStyle.css">
+</head>
+<body>
+
+  <img src="img/bottomRight.png" class="decor-shape shape-2" />
+  <img src="img/bottomLeft.png" class="decor-shape shape-4" />
+
+  <h1>Guest Messages & Drawings</h1>
+  <button id="backBtn" class="back-btn">← Back</button>
+
+  <div id="grid" class="grid"></div>
+  <div id="loader">Loading...</div>
+
+  <!-- OVERLAY -->
+  <div id="popupOverlay" class="modal-overlay"></div>
+
+<!-- Overlay -->
+<div id="popupOverlay" class="modal-overlay"></div>
+
+<!-- DELETE POPUP -->
+<div id="deletePopup" class="modal-box">
+  <h3>Delete Message?</h3>
+  <p>This action cannot be undone.</p>
+
+  <input id="deletePassword" type="password" class="password-field" placeholder="Password">
+
+  <div class="modal-actions">
+    <button id="cancelDelete" class="modal-btn cancel">Cancel</button>
+    <button id="confirmDelete" class="modal-btn delete">Delete</button>
+  </div>
+</div>
+
+<!-- RESULT POPUP (MUST BE OUTSIDE THE DELETE POPUP) -->
+<div id="resultPopup" class="modal-box">
+  <p id="resultText">Result</p>
+</div>
+
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+
+  <script src="js/firebase-config.js"></script>
+  <script src="js/viewerScript.js"></script>
+
+</body>
+</html>

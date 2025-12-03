@@ -1,0 +1,268 @@
+/* -------------------------------------- */
+/*            GLOBAL THEME                */
+/* -------------------------------------- */
+:root {
+  --gold-color: #d4a017;
+  --gold-light: #e6c56a;
+  --bg-color: #fcfaf6;
+  --text-color: #333;
+  --white-color: #fff;
+  --shadow-light: rgba(0, 0, 0, 0.08);
+}
+
+body {
+  margin: 0;
+  padding: 20px;
+  background: var(--bg-color)
+    url("https://www.transparenttextures.com/patterns/white-wall.png");
+  font-family: "Montserrat", sans-serif;
+  color: var(--text-color);
+  text-align: center;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* -------------------------------------- */
+/*                 TITLE                  */
+/* -------------------------------------- */
+h1 {
+  color: var(--gold-color);
+  font-size: 2.3rem;
+  margin-bottom: 30px;
+  font-family: "Great Vibes", cursive;
+}
+
+/* -------------------------------------- */
+/*               BACK BUTTON              */
+/* -------------------------------------- */
+.back-btn {
+  background: var(--gold-color);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  box-shadow: 0 4px 10px var(--shadow-light);
+  margin-bottom: 20px;
+  transition: 0.2s;
+}
+
+.back-btn:hover {
+  background: #b68b12;
+}
+
+/* -------------------------------------- */
+/*                 GRID LAYOUT            */
+/* -------------------------------------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 25px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-bottom: 60px;
+}
+
+/* -------------------------------------- */
+/*                  CARDS                 */
+/* -------------------------------------- */
+.card {
+  background: var(--white-color);
+  padding: 18px;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px var(--shadow-light);
+  border: 1px solid #eee;
+  position: relative;
+  transition: 0.25s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* -------------------------------------- */
+/*              DRAWING IMAGE             */
+/* -------------------------------------- */
+.imgwrap {
+  width: 100%;
+  height: 200px;
+  background: #f0f0f0;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imgwrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* -------------------------------------- */
+/*                MESSAGE TEXT            */
+/* -------------------------------------- */
+.msg {
+  margin-top: 14px;
+  font-size: 1rem;
+  white-space: pre-wrap;
+  text-align: left;
+  min-height: 40px;
+  color: var(--text-color);
+  line-height: 1.5;
+}
+
+/* -------------------------------------- */
+/*               DELETE BUTTON            */
+/* -------------------------------------- */
+.delete-btn {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  background: #d9534f;
+  color: #fff;
+  border: none;
+  padding: 8px 13px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: 0.2s;
+  box-shadow: 0 4px 10px var(--shadow-light);
+}
+
+.delete-btn:hover {
+  background: #b94643;
+}
+
+/* -------------------------------------- */
+/*              LOADING TEXT              */
+/* -------------------------------------- */
+#loader {
+  display: none;
+  color: var(--gold-color);
+  margin-top: 20px;
+  font-weight: 600;
+}
+
+/* -------------------------------------- */
+/*               MODALS STYLE             */
+/* -------------------------------------- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-box {
+  background: var(--white-color);
+  padding: 25px;
+  border-radius: 16px;
+  width: 320px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.modal-box h3 {
+  font-size: 1.4rem;
+  color: var(--gold-color);
+  margin-bottom: 10px;
+}
+
+.modal-box p {
+  font-size: 0.98rem;
+  opacity: 0.8;
+  margin-bottom: 20px;
+}
+
+/* Password Field */
+.password-field {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+  outline: none;
+}
+
+.password-field:focus {
+  border-color: var(--gold-color);
+}
+
+/* Modal Buttons */
+.modal-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.modal-btn {
+  flex: 1;
+  padding: 10px 0;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.modal-btn.cancel {
+  background: #ddd;
+  color: #333;
+}
+
+.modal-btn.delete {
+  background: #d9534f;
+  color: #fff;
+}
+/* ------------------------------ */
+/*        GEOMETRIC BACKGROUND    */
+/* ------------------------------ */
+
+.decor-shape {
+  position: fixed;
+  pointer-events: none;
+  z-index: -1;
+  filter: drop-shadow(0 4px 6px rgba(255, 242, 0, 0.1));
+}
+
+.shape-1 { width: 300px; top: 100px; left: 100px; }
+.shape-2 { width: 300px; bottom: 100px; right: 100px; }
+.shape-3 { width: 300px; top: 100px; right: 100px; }
+.shape-4 { width: 300px; bottom: 100px; left: 100px; }
+
+@media (max-width: 700px) {
+  .shape-1 { width: 220px; top: -30px; left: -20px; }
+  .shape-2 { width: 230px; bottom: -40px; right: -30px; }
+  .shape-3 { width: 200px; top: -30px; right: -20px; }
+  .shape-4 { width: 180px; bottom: -20px; left: -20px; }
+}
+#deletePopup,
+#resultPopup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+
+#popupOverlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 9998;
+}
+
