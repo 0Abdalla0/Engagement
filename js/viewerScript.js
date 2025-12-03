@@ -1,6 +1,6 @@
 /* -----------------------------------------------------
-   Viewer.js — Full Stable Version (Cloudinary delete via Node.js backend)
-   Safe Firebase reads, infinite scroll, modal deletion, mobile gestures
+   Viewer.js — Clean Delete Version
+   Deletes from Firebase ONLY and removes the card visually
 ----------------------------------------------------- */
 
 const grid = document.getElementById("grid");
@@ -9,23 +9,19 @@ const grid = document.getElementById("grid");
 const db = firebase.database();
 const messagesRef = db.ref("messages");
 
-// Infinite scroll variables
+// Infinite scroll settings
 const PAGE_SIZE = 8;
 let lastKey = null;
 let loading = false;
 let finished = false;
 
-// Mobile double-tap detection
+// Double-tap detection (mobile)
 let lastTapTime = 0;
 
-/* -----------------------------------------------------
-   Load first set of messages
------------------------------------------------------ */
+/* ------------------------- Load first messages ------------------------- */
 loadMore();
 
-/* -----------------------------------------------------
-   Infinite scroll
------------------------------------------------------ */
+/* ------------------------- Infinite scroll ------------------------- */
 window.addEventListener("scroll", () => {
   if (loading || finished) return;
 
@@ -34,9 +30,7 @@ window.addEventListener("scroll", () => {
   }
 });
 
-/* -----------------------------------------------------
-   Load more messages from Firebase
------------------------------------------------------ */
+/* ------------------------- Load messages ------------------------- */
 function loadMore() {
   if (loading) return;
   loading = true;
@@ -47,7 +41,6 @@ function loadMore() {
   query.once("value", (snap) => {
     const raw = snap.val();
 
-    // If empty database
     if (!raw || typeof raw !== "object") {
       document.getElementById("loader").textContent = "No messages yet ❤️";
       finished = true;
@@ -55,25 +48,16 @@ function loadMore() {
       return;
     }
 
-    // FILTER out invalid entries
     const valid = Object.entries(raw).filter(([id, msg]) => {
-      return (
-        msg &&
-        typeof msg === "object" &&
-        typeof msg.time === "number" &&
-        !isNaN(msg.time)
-      );
+      return msg && typeof msg === "object" && typeof msg.time === "number";
     });
 
-    // No valid messages
     if (valid.length === 0) {
-      document.getElementById("loader").textContent = "No valid messages ❤️";
       finished = true;
       loading = false;
       return;
     }
 
-    // Sort newest → oldest
     const items = valid.sort((a, b) => b[1].time - a[1].time);
 
     if (lastKey) items.shift();
@@ -86,33 +70,27 @@ function loadMore() {
   });
 }
 
-/* -----------------------------------------------------
-   Render card
------------------------------------------------------ */
+/* ------------------------- Render Card ------------------------- */
 function renderCard(id, item) {
   const card = document.createElement("div");
   card.className = "card";
 
-  // Mobile double-tap
+  // Double-tap mobile
   card.addEventListener("click", () => {
     const now = Date.now();
-    if (now - lastTapTime < 300) {
-      openDeletePopup(id, item);
-    }
+    if (now - lastTapTime < 300) openDeletePopup(id, item, card);
     lastTapTime = now;
   });
 
-  // Desktop double-click
-  card.addEventListener("dblclick", () => openDeletePopup(id, item));
+  // Double-click desktop
+  card.addEventListener("dblclick", () => openDeletePopup(id, item, card));
 
-  // Drawing section
   const imgwrap = document.createElement("div");
   imgwrap.className = "imgwrap";
 
   if (item.drawing) {
     const img = document.createElement("img");
     img.src = item.drawing;
-    img.alt = "Drawing";
     imgwrap.appendChild(img);
   } else {
     const empty = document.createElement("span");
@@ -120,7 +98,6 @@ function renderCard(id, item) {
     imgwrap.appendChild(empty);
   }
 
-  // Message text
   const msg = document.createElement("p");
   msg.className = "msg";
   msg.textContent = item.message || "No message";
@@ -131,22 +108,16 @@ function renderCard(id, item) {
   grid.appendChild(card);
 }
 
-/* -----------------------------------------------------
-   Delete Popup
------------------------------------------------------ */
-function openDeletePopup(id, item) {
-  if (!id || !item) return;
-
+/* ------------------------- Delete Popup ------------------------- */
+function openDeletePopup(id, item, cardElement) {
   const popup = document.getElementById("deletePopup");
   const overlay = document.getElementById("popupOverlay");
 
   popup.style.display = "block";
   overlay.style.display = "block";
 
-  // Reset password field
   document.getElementById("deletePassword").value = "";
 
-  // Confirm delete
   document.getElementById("confirmDelete").onclick = () => {
     const pass = document.getElementById("deletePassword").value.trim();
 
@@ -156,10 +127,9 @@ function openDeletePopup(id, item) {
       return;
     }
 
-    deleteMessage(id, item);
+    deleteMessage(id, cardElement);
   };
 
-  // Cancel button
   document.getElementById("cancelDelete").onclick = closePopup;
 }
 
@@ -168,32 +138,16 @@ function closePopup() {
   document.getElementById("popupOverlay").style.display = "none";
 }
 
-/* -----------------------------------------------------
-   Delete Message (Firebase + Cloudinary)
------------------------------------------------------ */
-async function deleteMessage(id, item) {
+/* ------------------------- Delete Firebase + UI Card ------------------------- */
+async function deleteMessage(id, cardElement) {
   try {
-    // Delete from Firebase
     await messagesRef.child(id).remove();
 
-    // Delete Cloudinary file if exists
-    if (item.drawing) {
-      const publicId = extractPublicId(item.drawing);
-      if (publicId) {
-        await deleteCloudinary(publicId);
-      }
-    }
+    // fade out and remove the card only
+    cardElement.style.opacity = "0";
+    setTimeout(() => cardElement.remove(), 400);
 
     showResultPopup("Deleted Successfully ✅");
-
-    // Remove UI card smoothly
-    const cards = document.querySelectorAll(".card");
-    cards.forEach((c) => {
-      if (c.innerText.includes(item.message)) {
-        c.style.opacity = "0";
-        setTimeout(() => c.remove(), 400);
-      }
-    });
   } catch (err) {
     console.error(err);
     showResultPopup("Delete Failed ❌");
@@ -202,43 +156,7 @@ async function deleteMessage(id, item) {
   closePopup();
 }
 
-/* -----------------------------------------------------
-   Extract Cloudinary Public ID
------------------------------------------------------ */
-function extractPublicId(url) {
-  try {
-    const parts = url.split("/");
-    const file = parts[parts.length - 1];
-    return file.split(".")[0];
-  } catch {
-    return null;
-  }
-}
-
-/* -----------------------------------------------------
-   Call your Node.js backend to delete Cloudinary image
------------------------------------------------------ */
-async function deleteCloudinary(publicId) {
-  try {
-    const response = await fetch(
-      `http://localhost:3000/cloudinary-delete,?public_id=${publicId}`,
-      { method: "DELETE" }
-    );
-
-    if (!response.ok) {
-      throw new Error("Cloudinary delete failed");
-    }
-
-    return true;
-  } catch (err) {
-    console.error("Cloudinary delete error:", err);
-    return false;
-  }
-}
-
-/* -----------------------------------------------------
-   Result popup (success or error)
------------------------------------------------------ */
+/* ------------------------- Result popup ------------------------- */
 function showResultPopup(text) {
   const popup = document.getElementById("resultPopup");
   const overlay = document.getElementById("popupOverlay");
@@ -253,3 +171,7 @@ function showResultPopup(text) {
     overlay.style.display = "none";
   }, 1800);
 }
+/* ------------------------- Back Button ------------------------- */
+document.getElementById("backBtn").onclick = () => {
+  window.location.href = "index.html"; // or whichever page you want
+};
