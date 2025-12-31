@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // ===============================
   //   COUNTDOWN TIMER
   // ===============================
-  const countDownDate = new Date("Mar 6, 2026 20:00:00").getTime();
+  const countDownDate = new Date("Mar 22, 2026 20:00:00").getTime();
   setInterval(() => {
     const now = Date.now();
     const d = countDownDate - now;
