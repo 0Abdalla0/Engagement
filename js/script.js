@@ -336,7 +336,7 @@ const translations = {
     saveDate: "احفظوا الموعد",
     day: "الأحد",
     time: "الساعة 8:00 مساءً",
-    days: "أيام",
+    days: "يوم",
     hours: "ساعات",
     minutes: "دقائق",
     seconds: "ثواني",
