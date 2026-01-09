@@ -266,3 +266,29 @@ h1 {
   z-index: 9998;
 }
 
+/* -------------------------------------- */
+/*           ARABIC SUPPORT               */
+/* -------------------------------------- */
+.lang-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10000;
+  background: var(--gold-color);
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 4px 10px var(--shadow-light);
+}
+
+body.ar {
+  direction: rtl;
+  font-family: 'Tajawal', 'Cairo', sans-serif;
+}
+
+body.ar h1 { font-family: 'Amiri', serif; }
+body.ar .msg { text-align: right; }
+body.ar .delete-btn { right: auto; left: 14px; }

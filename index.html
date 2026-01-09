@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css" />
   <style>
@@ -18,6 +19,7 @@
 </head>
 
 <body>
+  <button class="lang-btn" onclick="toggleLanguage()">العربية</button>
 
   <img src="img/topLeft.png" class="decor-shape shape-1" />
   <img src="img/bottomRight.png" class="decor-shape shape-2" />
@@ -27,44 +29,58 @@
   <div class="container">
 
     <header class="header">
-      <h1>Abdelrhman & Salma</h1>
+      <h1 data-key="names">Abdelrhman & Salma</h1>
     </header>
 
-    <h2 class="title-with-ring">
+    <h2 class="title-with-ring" data-key="engaged">
       <img src="img/ring.png" class="ring-icon" />
       We're Getting Engaged!
       <img src="img/ring.png" class="ring-icon" />
     </h2>
-  <section class="event-details">
-      <h3 class="event-title">Save The Date</h3>
+
+    <section class="event-details">
+      <h3 class="event-title" data-key="saveDate">Save The Date</h3>
 
       <div class="date-card">
-          <div class="date-side">
-          <span class="date-side-title">Sunday</span>
-          </div>
+        <div class="date-side">
+          <span class="date-side-title" data-key="day">Sunday</span>
+        </div>
 
-          <div class="date-center">
+        <div class="date-center">
           <span class="date-number">22</span>
           <span class="date-month">March</span>
           <span class="date-year">2026</span>
-          </div>
-<!--  -->
-          <div class="date-side">
-          <span class="date-side-title">at 8:00 PM</span>
-          </div>
+        </div>
+
+        <div class="date-side">
+          <span class="date-side-title" data-key="time">at 8:00 PM</span>
+        </div>
       </div>
-      </section>
+    </section>
+
     <section id="countdown">
-      <div class="timer-box"><span id="days">0</span><p>Days</p></div>
-      <div class="timer-box"><span id="hours">0</span><p>Hours</p></div>
-      <div class="timer-box"><span id="minutes">0</span><p>Minutes</p></div>
-      <div class="timer-box"><span id="seconds">0</span><p>Seconds</p></div>
+      <div class="timer-box">
+        <span id="days">0</span>
+        <p data-key="days">Days</p>
+      </div>
+      <div class="timer-box">
+        <span id="hours">0</span>
+        <p data-key="hours">Hours</p>
+      </div>
+      <div class="timer-box">
+        <span id="minutes">0</span>
+        <p data-key="minutes">Minutes</p>
+      </div>
+      <div class="timer-box">
+        <span id="seconds">0</span>
+        <p data-key="seconds">Seconds</p>
+      </div>
     </section>
 
     <section class="message-section">
-      <h3 class="message-title">Leave Us a Message 💌</h3>
+      <h3 class="message-title" data-key="leaveMsg">Leave Us a Message 💌</h3>
 
-      <label class="color-label">Pick a Color:</label>
+      <label class="color-label" data-key="pickColor">Pick a Color:</label>
       <div class="color-options">
         <span class="color-dot black" data-color="#000"></span>
         <span class="color-dot red" data-color="#e63946"></span>
@@ -74,87 +90,79 @@
         <span class="color-dot gold" data-color="#d4a017"></span>
       </div>
 
-      <textarea id="guestMessage" placeholder="Your Message..."></textarea>
+      <textarea
+        id="guestMessage"
+        data-key="messagePlaceholder"
+        placeholder="Your Message..."
+      ></textarea>
 
       <div class="message-preview">
-        <p id="previewText">Your message will appear here...</p>
+        <p id="previewText" data-key="previewPlaceholder">
+          Your message will appear here...
+        </p>
       </div>
 
-      <h4 class="draw-title">Or Draw Something 🎨</h4>
+      <h4 class="draw-title" data-key="drawTitle">Or Draw Something 🎨</h4>
 
       <div class="draw-container">
         <canvas id="drawCanvas"></canvas>
 
         <div class="draw-tools">
-          <button class="draw-btn" onclick="undo()">Undo ↩️</button>
-          <button class="draw-btn" onclick="redo()">Redo ↪️</button>
+          <button class="draw-btn" onclick="undo()" data-key="undo">Undo ↩️</button>
+          <button class="draw-btn" onclick="redo()" data-key="redo">Redo ↪️</button>
         </div>
 
-        <button id="clearCanvas" class="draw-btn">Clear</button>
+        <button id="clearCanvas" class="draw-btn" data-key="clear">Clear</button>
       </div>
 
-      <button id="saveMessage" class="draw-btn">Save Message ❤️</button>
+      <button id="saveMessage" class="draw-btn" data-key="saveMessage">
+        Save Message ❤️
+      </button>
       <p id="saveStatus" class="save-status"></p>
 
-      <button class="view-btn" onclick="window.location.href='viewer.html'">View Messages</button>
+      <button class="view-btn" data-key="viewMessages"
+        onclick="window.location.href='viewer.html'">
+        View Messages
+      </button>
     </section>
-    <section class="location">
-        <h3>Location</h3>
-        <div class="map-container">
-            <h3>Will be updated soon ❤️</h3>
-          <!-- 
-                  HOW TO ADD YOUR LOCATION:
-                  1. Go to Google Maps (https://www.google.com/maps).
-                  2. Search for your event location.
-                  3. Click the "Share" button.
-                  4. Go to the "Embed a map" tab.
-                  5. Click "COPY HTML".
-                  6. Paste the copied code below, replacing the existing <iframe>.
-                -->
-          <!-- <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.882823308222!2d31.23344487532341!3d30.04019991834199!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145840c63ab36691%3A0x487603328138c11!2sThe%20Nile%20Ritz-Carlton%2C%20Cairo!5e0!3m2!1sen!2seg!4v1677864593456!5m2!1sen!2seg"
-            width="600"
-            height="450"
-            style="border: 0"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          ></iframe> -->
-        </div>
-      </section>
 
-
-<!-- QR Section -->
-<section class="qr-section">
-  <h3 class="qr-title">Upload Photos Here</h3>
-  <br>
-
-  <!-- Clickable QR -->
-  <a href="https://photos.app.goo.gl/qCK9FcigkXVZw4ci8" target="_blank" class="qr-wrapper" style="display:inline-block;">
-    <img src="img/qrCode.png" alt="QR Code" class="qr-image" />
-  </a>
-
-  <!-- Info Text -->
-  <p class="qr-text">
-    You can click or scan this QR code 📸
-  </p>
-
+<section class="location">
+  <h3 data-key="location">Location</h3>
+  <div class="map-container">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3776.670492103514!2d31.26198007555004!3d29.948623674971966!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjnCsDU2JzU1LjEiTiAzMcKwMTUnNTIuNCJF!5e1!3m2!1sen!2seg!4v1767960479932!5m2!1sen!2seg"
+      allowfullscreen
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
 </section>
 
 
-    <footer><p>We can't wait to see you!</p></footer>
+    <section class="qr-section">
+      <h3 class="qr-title" data-key="uploadPhotos">Upload Photos Here</h3>
+      <br>
+
+      <a href="https://photos.app.goo.gl/qCK9FcigkXVZw4ci8" target="_blank"
+         class="qr-wrapper" style="display:inline-block;">
+        <img src="img/qrCode.png" alt="QR Code" class="qr-image" />
+      </a>
+
+      <p class="qr-text" data-key="qrText">
+        You can click or scan this QR code 📸
+      </p>
+    </section>
+
+    <footer>
+      <p data-key="footer">We can't wait to see you!</p>
+    </footer>
 
   </div>
 
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
-
-<!-- Firebase config MUST come after firebase-app-compat -->
-<script src="js/firebase-config.js"></script>
-
-<!-- Your project scripts -->
-<script src="js/script.js"></script>
-
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/script.js"></script>
 
 </body>
 </html>

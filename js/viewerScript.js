@@ -175,3 +175,16 @@ function showResultPopup(text) {
 document.getElementById("backBtn").onclick = () => {
   window.location.href = "index.html"; // or whichever page you want
 };
+function toggleLanguage() {
+  const body = document.body;
+  const btn = document.querySelector(".lang-btn");
+
+  body.classList.toggle("ar");
+
+  if (body.classList.contains("ar")) {
+    btn.textContent = "English";
+    // Optional: Update other static text elements here if needed
+  } else {
+    btn.textContent = "العربية";
+  }
+}
